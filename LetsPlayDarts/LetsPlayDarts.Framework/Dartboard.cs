@@ -4,14 +4,6 @@ namespace LetsPlayDarts.Framework
 {
     public class Dartboard
     {
-        //Possible scores are:
-        //Outside of the board: `"X"`
-        //Bull's eye: `"DB"`
-        //Bull: `"SB"`
-        //A single number, example: `"10"`
-        //A triple number: `"T10"`
-        //A double number: `"D10"`
-
         //The diameters of the circles on the dartboard are:
         //Bull's eye: `12.70 mm`
         //Bull: `31.8 mm`
@@ -19,7 +11,6 @@ namespace LetsPlayDarts.Framework
         //Triple ring outer circle: `214 mm`
         //Double ring inner circle: `324 mm`
         //Double ring outer circle: `340 mm`
-
         double[] _circleRadi = new double[6]
         {
             6.35,
@@ -100,7 +91,11 @@ namespace LetsPlayDarts.Framework
 
         private double CalculateAngleInDegrees(double x, double y)
         {
-            return Math.Atan(y / x);
+            //Math.Atan returns angle in radians
+            double angleInRadians = Math.Atan(Math.Abs(y) / Math.Abs(x));
+
+            //Convert to degrees
+            return (180 / Math.PI) * angleInRadians;
         }
 
         private double CalculateDistanceFromCenter(double x, double y)
@@ -132,15 +127,15 @@ namespace LetsPlayDarts.Framework
         {
             public double DetermineScoreInFirstQuadrant(double angle)
             {
-                if (IsWithin(angle, 82, 90))
+                if (IsWithin(angle, 81, 90))
                     return 20;
-                if (IsWithin(angle, 64, 81))
+                if (IsWithin(angle, 63, 81))
                     return 1;
-                if (IsWithin(angle, 46, 63))
+                if (IsWithin(angle, 45, 63))
                     return 18;
-                if (IsWithin(angle, 28, 45))
+                if (IsWithin(angle, 27, 45))
                     return 4;
-                if (IsWithin(angle, 10, 27))
+                if (IsWithin(angle, 9, 27))
                     return 13;
                 if (IsWithin(angle, 0, 9))
                     return 6;
@@ -150,15 +145,15 @@ namespace LetsPlayDarts.Framework
 
             public double DetermineScoreInSecondQuadrant(double angle)
             {
-                if (IsWithin(angle, 82, 90))
+                if (IsWithin(angle, 81, 90))
                     return 20;
-                if (IsWithin(angle, 64, 81))
+                if (IsWithin(angle, 63, 81))
                     return 5;
-                if (IsWithin(angle, 46, 63))
+                if (IsWithin(angle, 45, 63))
                     return 12;
-                if (IsWithin(angle, 28, 45))
+                if (IsWithin(angle, 27, 45))
                     return 9;
-                if (IsWithin(angle, 10, 27))
+                if (IsWithin(angle, 9, 27))
                     return 14;
                 if (IsWithin(angle, 0, 9))
                     return 11;
@@ -168,33 +163,33 @@ namespace LetsPlayDarts.Framework
 
             public double DetermineScoreInThirdQuadrant(double angle)
             {
-                if (IsWithin(angle, 82, 90))
+                if (IsWithin(angle, 81, 90))
                     return 3;
-                if (IsWithin(angle, 64, 81))
+                if (IsWithin(angle, 63, 81))
                     return 19;
-                if (IsWithin(angle, 46, 63))
+                if (IsWithin(angle, 45, 63))
                     return 7;
-                if (IsWithin(angle, 28, 45))
+                if (IsWithin(angle, 27, 45))
                     return 16;
-                if (IsWithin(angle, 10, 27))
+                if (IsWithin(angle, 9, 27))
                     return 8;
                 if (IsWithin(angle, 0, 9))
                     return 11;
 
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException($"angle was {angle}");
             }
 
             public double DetermineScoreInFourthQuadrant(double angle)
             {
-                if (IsWithin(angle, 82, 90))
+                if (IsWithin(angle, 81, 90))
                     return 3;
-                if (IsWithin(angle, 64, 81))
+                if (IsWithin(angle, 63, 81))
                     return 17;
-                if (IsWithin(angle, 46, 63))
-                    return 7;
-                if (IsWithin(angle, 28, 45))
+                if (IsWithin(angle, 45, 63))
+                    return 2;
+                if (IsWithin(angle, 27, 45))
                     return 15;
-                if (IsWithin(angle, 10, 27))
+                if (IsWithin(angle, 9, 27))
                     return 10;
                 if (IsWithin(angle, 0, 9))
                     return 6;
@@ -204,7 +199,7 @@ namespace LetsPlayDarts.Framework
 
             private bool IsWithin(double angle, double start, double end)
             {
-                return angle >= start && angle <= end;
+                return angle > start && angle <= end;
             }
         }
     }
