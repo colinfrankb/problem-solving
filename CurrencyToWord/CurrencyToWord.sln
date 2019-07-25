@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyToWord.Tests", "CurrencyToWord.Tests\CurrencyToWord.Tests.csproj", "{B4EB0071-8159-47DE-B608-464007C82753}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyToWord.Framework", "CurrencyToWord.Framework\CurrencyToWord.Framework.csproj", "{513B9A9D-1E0E-4436-AFD4-ED1036C5EDAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4EB0071-8159-47DE-B608-464007C82753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4EB0071-8159-47DE-B608-464007C82753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4EB0071-8159-47DE-B608-464007C82753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4EB0071-8159-47DE-B608-464007C82753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513B9A9D-1E0E-4436-AFD4-ED1036C5EDAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513B9A9D-1E0E-4436-AFD4-ED1036C5EDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513B9A9D-1E0E-4436-AFD4-ED1036C5EDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513B9A9D-1E0E-4436-AFD4-ED1036C5EDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04A63176-ACF7-45AC-912A-B7617AECCB9C}
+	EndGlobalSection
+EndGlobal
