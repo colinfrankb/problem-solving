@@ -6,22 +6,23 @@
         {
             public int[] solution(int[] A, int[] B)
             {
-                //1, 1, 1, 1, 1
-                //2, 2, 2
+                // 1, 1, 1, 1
+                // 2, 2
+
                 int[] result = new int[A.Length + B.Length];
 
-                for (int i = 0, j = 0; i < A.Length || i < B.Length; i++)
+                for (int i = 0, j = 0; i < result.Length; j++)
                 {
-                    if (i < A.Length)
+                    if (j < A.Length)
                     {
-                        result[j] = A[i];
-                        j++;
+                        result[i] = A[j];
+                        i++;
                     }
 
-                    if (i < B.Length)
+                    if (j < B.Length)
                     {
-                        result[j] = B[i];
-                        j++;
+                        result[i] = B[j];
+                        i++;
                     }
                 }
 

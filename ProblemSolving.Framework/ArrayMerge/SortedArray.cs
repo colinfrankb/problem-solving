@@ -19,32 +19,37 @@ namespace ProblemSolving.Framework.ArrayMerge
                 //5, 6
                 int[] result = new int[A.Length + B.Length];
 
-                for (int i = 0, Ai = 0, Bi = 0; Ai < A.Length || Bi < B.Length; i++)
+                for (int i = 0, j = 0, k = 0; i < result.Length;)
                 {
-                    if (Ai < A.Length && Bi < B.Length)
+                    if (j < A.Length && k < B.Length)
                     {
-                        if (A[Ai] <= B[Bi])
+                        if (A[j] < B[k])
                         {
-                            result[i] = A[Ai];
-                            Ai++;
+                            result[i] = A[j];
+                            j++;
                         }
                         else
                         {
-                            result[i] = B[Bi];
-                            Bi++;
+                            result[i] = B[k];
+                            k++;
                         }
+
+                        i++;
                     }
                     else
                     {
-                        if (Ai < A.Length)
+                        if (j < A.Length)
                         {
-                            result[i] = A[Ai];
-                            Ai++;
+                            result[i] = A[j];
+                            i++;
+                            j++;
                         }
-                        else // Bi < B.Length
+
+                        if (k < B.Length)
                         {
-                            result[i] = B[Bi];
-                            Bi++;
+                            result[i] = B[k];
+                            i++;
+                            k++;
                         }
                     }
                 }
