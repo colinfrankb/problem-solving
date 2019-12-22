@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using ProblemSolving.Framework.ArrayMerge;
 
-namespace ProblemSolving.Tests.ArrayMerge
+namespace ProblemSolving.Tests.ReverseString
 {
     [TestFixture]
     public class UsingRecursionTests
