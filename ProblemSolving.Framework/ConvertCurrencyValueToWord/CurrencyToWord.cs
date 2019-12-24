@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace ProblemSolving.Framework.ConvertCurrencyValueToWord
@@ -11,7 +12,6 @@ namespace ProblemSolving.Framework.ConvertCurrencyValueToWord
         {
             private IDictionary<string, string> _unitsHash = new Dictionary<string, string>
             {
-                { "0", "" },
                 { "1", "one" },
                 { "2", "two" },
                 { "3", "three" },
@@ -52,6 +52,7 @@ namespace ProblemSolving.Framework.ConvertCurrencyValueToWord
             public string solution(string amount)
             {
                 List<string> result = new List<string>();
+                List<string> centsResult = new List<string>();
                 string fullAmountWithOutCurrency = amount.Substring(1);
                 string[] split = fullAmountWithOutCurrency.Split('.');
                 string rands = split[0];
@@ -68,6 +69,30 @@ namespace ProblemSolving.Framework.ConvertCurrencyValueToWord
                     int number = Convert.ToInt32(digit);
                     int currentStep = step - i;
 
+                    if (number == 0)
+                    {
+                        i++;
+                        continue;
+                    }
+
+                    if (currentStep == 3) //thousands
+                    {
+                        result.Add(_unitsHash[digit]);
+                        result.Add("thousand");
+                        i++;
+                    }
+                    if (currentStep == 2) //hundreds
+                    {
+                        result.Add(_unitsHash[digit]);
+                        result.Add("hundred");
+
+                        if ((i + 1) < rands.Length)
+                        {
+                            result.Add("and");
+                        }
+
+                        i++;
+                    }
                     if (currentStep == 1) //tens
                     {
                         if (number == 1)
@@ -96,39 +121,46 @@ namespace ProblemSolving.Framework.ConvertCurrencyValueToWord
 
                 for (int i = 0, step = cents.Length - 1; i < cents.Length;)
                 {
-                    if (i == 0)
-                    {
-                        result.Add("and");
-                    }
-
                     string digit = cents[i].ToString();
                     int number = Convert.ToInt32(digit);
                     int currentStep = step - i;
+
+                    if (number == 0)
+                    {
+                        i++;
+                        continue;
+                    }
 
                     if (currentStep == 1) //tens
                     {
                         if (number == 1)
                         {
                             string nextDigit = cents[i + 1].ToString();
-                            result.Add(_teensHash[$"{digit}{nextDigit}"]);
+                            centsResult.Add(_teensHash[$"{digit}{nextDigit}"]);
                             i += 2;
                         }
                         else
                         {
-                            result.Add(_tensHash[digit]);
+                            centsResult.Add(_tensHash[digit]);
                             i++;
                         }
                     }
                     else if (currentStep == 0) //units
                     {
-                        result.Add(_unitsHash[digit]);
+                        centsResult.Add(_unitsHash[digit]);
                         i++;
                     }
 
                     if (i > cents.Length - 1)
                     {
-                        result.Add("cents");
+                        centsResult.Add("cents");
                     }
+                }
+
+                if (centsResult.Count > 0)
+                {
+                    result.Add("and");
+                    result.AddRange(centsResult);
                 }
 
                 string fullResult = string.Join(" ", result);
